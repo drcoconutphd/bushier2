@@ -60,7 +60,7 @@ class CaptureViewState extends State<CaptureView> {
             await Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => HomeView(
-                  // imagePath: image.path,
+                  imagePath: image.path,
                   title: 'Bushier2',
                   cameraDescription: widget.camera,
                 ),

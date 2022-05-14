@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:bushier2/views/capture.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
   final CameraDescription cameraDescription;
+  final String? imagePath;
 
   const HomeView({
     Key? key,
+    this.imagePath,
     required this.title,
     required this.cameraDescription,
   }) : super(key: key);
@@ -45,13 +49,9 @@ class _HomeViewState extends State<HomeView> {
 
           mainAxisAlignment: MainAxisAlignment.center, // center children vertically
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            (widget.imagePath == null)
+              ? const Text("Press on '+' and take a picture!")
+              : Image.file(File(widget.imagePath!))
           ],
         ),
       ),
