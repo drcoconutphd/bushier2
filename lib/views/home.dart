@@ -1,7 +1,14 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final CameraDescription cameraDescription;
+
+  const MyHomePage({
+    Key? key,
+    required this.title,
+    required this.cameraDescription,
+  }) : super(key: key);
 
   final String title;
 

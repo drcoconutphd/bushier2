@@ -1,22 +1,23 @@
 import 'package:bushier2/views/home.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+Future<void> main() async {
+  // Fetch the available cameras before initializing the app.
+  WidgetsFlutterBinding.ensureInitialized();
+  final cameraDescList = await availableCameras();
+  final firstCamera = cameraDescList.first;
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  runApp(
+    MaterialApp(
       title: 'Bushier2 Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Bushier2'),
-    );
-  }
+      home: MyHomePage(
+        title: 'Bushier2',
+        cameraDescription: firstCamera,
+      ),
+    )
+  );
 }
