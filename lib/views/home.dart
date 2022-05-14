@@ -1,10 +1,11 @@
+import 'package:bushier2/views/capture.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
+class HomeView extends StatefulWidget {
   final CameraDescription cameraDescription;
 
-  const MyHomePage({
+  const HomeView({
     Key? key,
     required this.title,
     required this.cameraDescription,
@@ -13,10 +14,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeViewState extends State<HomeView> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -55,7 +56,19 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          try {
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CaptureView(
+                  camera: widget.cameraDescription
+                ),
+              ),
+            );
+          } catch (e) {
+            SnackBar(content: Text(e.toString()));
+          }
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

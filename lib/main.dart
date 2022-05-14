@@ -14,7 +14,7 @@ Future<void> main() async {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(
+      home: HomeView(
         title: 'Bushier2',
         cameraDescription: firstCamera,
       ),
