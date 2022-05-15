@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bushier2/models/Segmentor.dart';
 import 'package:bushier2/views/CaptureView.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   DAO dao = DAO();
   ChartWidget chartWidget = ChartWidget();
+  Segmentor segmentor = Segmentor();
 
   Widget takePictureButton() {
     return FloatingActionButton(
@@ -93,6 +95,7 @@ class _HomeViewState extends State<HomeView> {
             takePictureButton(),
             const SizedBox(height: 10),
             dbTestButton(),
+            const SizedBox(height: 10),
             calculateTestButton()
           ],
         ),
