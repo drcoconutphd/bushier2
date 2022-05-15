@@ -15,13 +15,11 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(
-    MaterialApp(
-      title: 'Bushier2 Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SplashView(cameraDescription: firstCamera),
-    )
-  );
+  runApp(MaterialApp(
+    title: 'Bushier2 Demo',
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+    ),
+    home: SplashView(cameraDescription: firstCamera),
+  ));
 }
