@@ -77,7 +77,7 @@ class _HomeViewState extends State<HomeView> {
       onPressed: () async {
         chartWidget.calculate();
       },
-      child: const Icon(Icons.add),
+      child: const Icon(Icons.calculate),
     );
   }
 
