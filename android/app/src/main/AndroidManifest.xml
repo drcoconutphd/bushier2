@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bushier2">
-   <application
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <application
         android:label="bushier2"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
