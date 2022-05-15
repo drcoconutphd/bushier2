@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class NasaData {
@@ -28,15 +27,14 @@ class NasaPayload {
   }
 }
 
-class NasaDataRetriever {
-  late String url;
+class HttpDataRetriever {
 
-  Future<NasaPayload> getData({
+  Future<NasaPayload> getNasaData({
     required double lat,
     required double lng,
     required List<String> params
   }) async {
-    url = "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=${params.join(",")}"
+    String url = "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=${params.join(",")}"
         "&community=SB&longitude=$lng"
         "&latitude=$lat"
         "&format=JSON&start=2021&end=2021";
@@ -52,4 +50,5 @@ class NasaDataRetriever {
       throw Exception('Failed to load NASA Power API');
     }
   }
+
 }

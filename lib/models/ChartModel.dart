@@ -1,4 +1,4 @@
-import 'package:bushier2/NasaDataRetriever.dart';
+import 'package:bushier2/models/NasaDataRetriever.dart';
 import 'package:flutter/foundation.dart';
 
 class ChartData {
@@ -26,10 +26,10 @@ class ChartModel extends ChangeNotifier {
 
   List<ChartData> energyData = [];
   List<ChartData> savingsData = [];
-  NasaDataRetriever nasaDataRetriever = NasaDataRetriever();
+  HttpDataRetriever nasaDataRetriever = HttpDataRetriever();
 
   Future<void> calculate() async {
-    final nasaData = await nasaDataRetriever.getData(
+    final nasaData = await nasaDataRetriever.getNasaData(
         lat: 0.0,
         lng: 0.0,
         params: [NasaData.t2m, NasaData.t2m_max]
