@@ -1,5 +1,7 @@
 import 'package:bushier2/models/NasaDataRetriever.dart';
+import 'package:bushier2/models/SensorDataRetriever.dart';
 import 'package:flutter/foundation.dart';
+import 'package:geolocator/geolocator.dart';
 
 class ChartData {
   ChartData(this.x, this.y, this.y2);
@@ -26,12 +28,14 @@ class ChartModel extends ChangeNotifier {
 
   List<ChartData> energyData = [];
   List<ChartData> savingsData = [];
-  HttpDataRetriever nasaDataRetriever = HttpDataRetriever();
+  HttpDataRetriever httpDataRetriever = HttpDataRetriever();
+  SensorDataRetriever sensorDataRetriever = SensorDataRetriever();
 
   Future<void> calculate() async {
-    final nasaData = await nasaDataRetriever.getNasaData(
-        lat: 0.0,
-        lng: 0.0,
+    Position pos = await sensorDataRetriever.getPosition();
+    NasaPayload nasaData = await httpDataRetriever.getNasaData(
+        lat: pos.latitude,
+        lng: pos.longitude,
         params: [NasaData.t2m, NasaData.t2m_max]
     );
 
