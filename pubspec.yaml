@@ -43,6 +43,7 @@ dependencies:
   syncfusion_flutter_charts: ^20.1.55
   geolocator: ^8.2.1
   firebase_ml_model_downloader: ^0.1.0+13
+  http: 0.13.3
 
 dev_dependencies:
   flutter_test:
