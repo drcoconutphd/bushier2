@@ -1,3 +1,5 @@
+import 'package:bushier2/NasaDataDispatcher.dart';
+
 class ChartData {
   ChartData(this.x, this.y, this.y2);
   final String x;
@@ -8,6 +10,15 @@ class ChartData {
 class ChartModel {
   List<ChartData> energyData = [];
   List<ChartData> savingsData = [];
+  NasaDataRetriever nasaDataRetriever = NasaDataRetriever();
+
+  void calculate() {
+    final nasaData = nasaDataRetriever.getData(
+        lat: 0.0,
+        lng: 0.0,
+        params: [NasaData.t2m, NasaData.t2m_max]
+    );
+  }
 
   void spoof() {
     energyData = [

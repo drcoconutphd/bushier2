@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class NasaData {
@@ -28,28 +28,25 @@ class NasaPayload {
   }
 }
 
-class NasaDataDispatcher {
+class NasaDataRetriever extends ChangeNotifier {
   late String url;
 
-  NasaDataDispatcher({
+  Future<NasaPayload> getData({
     required double lat,
     required double lng,
     required List<String> params
-  }) {
+  }) async {
     url = "https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=${params.join(",")}"
         "&community=SB&longitude=$lng"
         "&latitude=$lat"
         "&format=JSON&start=2021&end=2021";
-    getData();
-  }
 
-  Future<NasaPayload> getData() async {
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      print("httpDispatcher/getData: response ${response.statusCode} ${response.body}");
+      // print("httpDispatcher/getData: response ${response.statusCode} ${response.body}");
       final payload = NasaPayload.fromJson(jsonDecode(response.body));
-      print("httpDispatcher/getData: ${payload.temps}");
+      // print("httpDispatcher/getData: ${payload.temps}");
       return payload;
     } else {
       throw Exception('Failed to load NASA Power API');
