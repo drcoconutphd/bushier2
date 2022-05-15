@@ -6,6 +6,12 @@ import '../models/ChartModel.dart';
 class ChartWidget extends StatefulWidget {
   @override
   State<ChartWidget> createState() => _ChartWidgetState();
+
+  ChartModel chartModel = ChartModel();
+
+  void calculate() {
+    chartModel.calculate();
+  }
 }
 
 class _ChartWidgetState extends State<ChartWidget> {
@@ -14,12 +20,15 @@ class _ChartWidgetState extends State<ChartWidget> {
   static const String COLOR_COST = 'cost';
   static const String COLOR_ENERGY = 'energy';
 
-  ChartModel chartModel = ChartModel();
-
   @override
   void initState() {
     super.initState();
-    chartModel.spoof();
+    widget.chartModel.spoof();
+    widget.chartModel.addListener(onModelChange);
+  }
+
+  void onModelChange() {
+    setState(() {});
   }
 
   TextStyle getChartTextStyle(String textType, String dataType) {
@@ -57,13 +66,13 @@ class _ChartWidgetState extends State<ChartWidget> {
         SplineAreaSeries<ChartData, String>(
             xAxisName: "Month",
             yAxisName: "Energy Savings",
-            dataSource: chartModel.energyData,
+            dataSource: widget.chartModel.energyData,
             xValueMapper: (ChartData data, _) => data.x,
             yValueMapper: (ChartData data, _) => data.y),
         SplineAreaSeries<ChartData, String>(
             xAxisName: "Month",
             yAxisName: "yAxis",
-            dataSource: chartModel.savingsData,
+            dataSource: widget.chartModel.savingsData,
             xValueMapper: (ChartData data, _) => data.x,
             yValueMapper: (ChartData data, _) => data.y2),
       ],

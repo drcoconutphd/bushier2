@@ -26,6 +26,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   DAO dao = DAO();
+  ChartWidget chartWidget = ChartWidget();
 
   Widget takePictureButton() {
     return FloatingActionButton(
@@ -55,6 +56,15 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  Widget calculateTestButton() {
+    return FloatingActionButton(
+      onPressed: () async {
+        chartWidget.calculate();
+      },
+      child: const Icon(Icons.add),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
             const Padding(
               padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
             ),
-            ChartWidget()
+            chartWidget
           ],
         ),
       ),
@@ -82,7 +92,8 @@ class _HomeViewState extends State<HomeView> {
           children: <Widget>[
             takePictureButton(),
             const SizedBox(height: 10),
-            dbTestButton()
+            dbTestButton(),
+            calculateTestButton()
           ],
         ),
       )
