@@ -1,4 +1,4 @@
-name: flutter_application_1
+name: bushier2
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -29,11 +29,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  camera:
+    git:
+      url: https://github.com/camsim99/plugins.git
+      path: packages/camera/camera
+      ref: issue_89578_dev
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  firebase_core: ^1.17.0
+  firebase_database: ^9.0.14
   syncfusion_flutter_charts: ^20.1.55
   geolocator: ^8.2.1
 
