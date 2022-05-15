@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../models/DAO.dart';
 import 'ChartWidget.dart';
+import './VendorPage.dart';
 
 class HomeView extends StatefulWidget {
   final CameraDescription cameraDescription;
@@ -36,9 +37,8 @@ class _HomeViewState extends State<HomeView> {
         try {
           await Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => CaptureView(
-                  camera: widget.cameraDescription
-              ),
+              builder: (context) =>
+                  CaptureView(camera: widget.cameraDescription),
             ),
           );
         } catch (e) {
@@ -51,23 +51,18 @@ class _HomeViewState extends State<HomeView> {
 
   Widget searchVendorsButton() {
     return FloatingActionButton(
-      onPressed: () async {
-        try {
-          await Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => CaptureView(
-                  camera: widget.cameraDescription
-              ),
-            ),
-          );
-        } catch (e) {
-          SnackBar(content: Text(e.toString()));
-        }
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => VendorPage(),
+          ),
+        );
       },
-      child: const Icon(Icons.camera),
+      child: const Icon(Icons.add_shopping_cart_outlined),
     );
   }
-  
+
   Widget dbTestButton() {
     return FloatingActionButton(
       onPressed: () async {
@@ -89,38 +84,40 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center( // layout widget, positions single child in middle of parent
-        child: (widget.imagePath == null)
-          ? const Text("Press on '+' and take a picture!")
-          : Column( // layout widget, arrange children vertically
-            mainAxisAlignment: MainAxisAlignment.center, // center children vertically
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Center(
+          // layout widget, positions single child in middle of parent
+          child: (widget.imagePath == null)
+              ? const Text("Press on '+' and take a picture!")
+              : Column(
+                  // layout widget, arrange children vertically
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // center children vertically
+                  children: <Widget>[
+                    Image.file(File(widget.imagePath!)),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                    ),
+                    chartWidget
+                  ],
+                ),
+        ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Image.file(File(widget.imagePath!)),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
-              ),
-              chartWidget
+              takePictureButton(),
+              const SizedBox(height: 10),
+              searchVendorsButton(),
+              const SizedBox(height: 10),
+              dbTestButton(),
+              const SizedBox(height: 10),
+              calculateTestButton()
             ],
           ),
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            takePictureButton(),
-            const SizedBox(height: 10),
-            searchVendorsButton(),
-            const SizedBox(height: 10),
-            dbTestButton(),
-            const SizedBox(height: 10),
-            calculateTestButton()
-          ],
-        ),
-      )
-    );
+        ));
   }
 }
