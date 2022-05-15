@@ -4,6 +4,8 @@ import 'package:bushier2/views/capture.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
+import '../DAO.dart';
+
 class HomeView extends StatefulWidget {
   final CameraDescription cameraDescription;
   final String? imagePath;
@@ -22,12 +24,34 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int _counter = 0;
+  DAO dao = DAO();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  Widget takePictureButton() {
+    return FloatingActionButton(
+      onPressed: () async {
+        try {
+          await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => CaptureView(
+                  camera: widget.cameraDescription
+              ),
+            ),
+          );
+        } catch (e) {
+          SnackBar(content: Text(e.toString()));
+        }
+      },
+      child: const Icon(Icons.camera),
+    );
+  }
+  
+  Widget dbTestButton() {
+    return FloatingActionButton(
+      onPressed: () async {
+        dao.update();
+      },
+      child: const Icon(Icons.add),
+    );
   }
 
   @override
@@ -55,23 +79,17 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          try {
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CaptureView(
-                  camera: widget.cameraDescription
-                ),
-              ),
-            );
-          } catch (e) {
-            SnackBar(content: Text(e.toString()));
-          }
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            takePictureButton(),
+            const SizedBox(height: 10),
+            dbTestButton()
+          ],
+        ),
+      )
     );
   }
 }
