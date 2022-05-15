@@ -4,7 +4,7 @@ import 'package:bushier2/views/capture.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import '../DAO.dart';
+import '../models/DAO.dart';
 
 class HomeView extends StatefulWidget {
   final CameraDescription cameraDescription;
