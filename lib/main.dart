@@ -1,4 +1,4 @@
-import 'package:bushier2/views/HomeView.dart';
+import 'package:bushier2/views/SplashView.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,10 +21,7 @@ Future<void> main() async {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeView(
-        title: 'Bushier2',
-        cameraDescription: firstCamera,
-      ),
+      home: SplashView(cameraDescription: firstCamera),
     )
   );
 }
