@@ -1,4 +1,4 @@
-import 'package:bushier2/views/home.dart';
+import 'package:bushier2/views/HomeView.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

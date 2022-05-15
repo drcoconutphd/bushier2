@@ -1,12 +1,11 @@
 import 'dart:io';
-import 'dart:math';
 
-import 'package:bushier2/views/capture.dart';
+import 'package:bushier2/views/CaptureView.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:vector_math/vector_math.dart';
 
+import '../models/ChartModel.dart';
 import '../models/DAO.dart';
 
 class HomeView extends StatefulWidget {
@@ -28,6 +27,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   DAO dao = DAO();
+  ChartModel chartModel = ChartModel();
+
+  @override
+  void initState() {
+    super.initState();
+    chartModel.spoof();
+  }
 
   Widget takePictureButton() {
     return FloatingActionButton(
@@ -57,6 +63,24 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  static const String TEXT_AXIS = 'axis';
+  static const String TEXT_LABEL = 'label';
+  static const String COLOR_COST = 'cost';
+  static const String COLOR_ENERGY = 'energy';
+
+
+  TextStyle getChartTextStyle(String textType, String dataType) {
+    double size = textType == TEXT_AXIS ? 20 : 14;
+    Color color = dataType == COLOR_COST ? const Color(0xFF4A87b9)
+        : const Color.fromARGB(255, 191, 109, 132);
+    return TextStyle(
+      color: color,
+      fontFamily: 'Roboto',
+      fontSize: size,
+      fontWeight: FontWeight.w500
+    );
+  }
+
   Widget resultChart() {
     return SfCartesianChart(
       enableAxisAnimation: true,
@@ -64,45 +88,29 @@ class _HomeViewState extends State<HomeView> {
       primaryYAxis: NumericAxis(
           title: AxisTitle(
               text: 'Energy Savings',
-              textStyle: TextStyle(
-                  color: Color(0xFF4A87b9),
-                  fontFamily: 'Roboto',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500)),
-          labelStyle: TextStyle(
-              color: Color(0xFF4A87b9),
-              fontFamily: 'Roboto',
-              fontSize: 14,
-              fontWeight: FontWeight.w500)),
+              textStyle: getChartTextStyle(TEXT_AXIS, COLOR_COST)),
+          labelStyle: getChartTextStyle(TEXT_LABEL, COLOR_COST)),
       axes: <ChartAxis>[
         NumericAxis(
             name: 'yAxis',
             opposedPosition: true,
             title: AxisTitle(
                 text: 'Cost Savings',
-                textStyle: TextStyle(
-                    color: Color.fromARGB(255, 191, 109, 132),
-                    fontFamily: 'Roboto',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500)),
-            labelStyle: TextStyle(
-                color: Color.fromARGB(255, 191, 109, 132),
-                fontFamily: 'Roboto',
-                fontSize: 14,
-                fontWeight: FontWeight.w500))
+                textStyle: getChartTextStyle(TEXT_AXIS, COLOR_ENERGY)),
+            labelStyle: getChartTextStyle(TEXT_LABEL, COLOR_ENERGY))
       ],
       series: <ChartSeries>[
         // Initialize line series
         SplineAreaSeries<ChartData, String>(
             xAxisName: "Month",
             yAxisName: "Energy Savings",
-            dataSource: energyData(),
+            dataSource: chartModel.energyData,
             xValueMapper: (ChartData data, _) => data.x,
             yValueMapper: (ChartData data, _) => data.y),
         SplineAreaSeries<ChartData, String>(
             xAxisName: "Month",
             yAxisName: "yAxis",
-            dataSource: savingsData(),
+            dataSource: chartModel.savingsData,
             xValueMapper: (ChartData data, _) => data.x,
             yValueMapper: (ChartData data, _) => data.y2),
       ],
@@ -146,74 +154,4 @@ class _HomeViewState extends State<HomeView> {
       )
     );
   }
-}
-
-class ChartData {
-  ChartData(this.x, this.y, this.y2);
-  final String x;
-  final double? y;
-  final double? y2;
-}
-
-List<ChartData> energyData() {
-  return [
-    // Bind data source
-    ChartData('Jan', 35, 1000),
-    ChartData('Feb', 28, 2000),
-    ChartData('Mar', 34, 3500),
-    ChartData('Apr', 32, 5500),
-    ChartData('May', 40, 6200)
-  ];
-}
-
-List<ChartData> savingsData() {
-  return [
-    // Bind data source
-    ChartData('Jan', 35, 1000),
-    ChartData('Feb', 28, 2000),
-    ChartData('Mar', 34, 3500),
-    ChartData('Apr', 32, 5500),
-    ChartData('May', 40, 6200)
-  ];
-}
-
-List<double> convertArea(
-    List<double> position, List<double> target, double length, double height,
-    {int climate = 1}) {
-  // position: cur gps posi
-  // target: building gpa posi
-  // length: base width of building
-  // height: height of building
-  // climate: 1 = singapore
-
-  double angle =
-  degrees(atan2(position[0] - target[0], position[1] - target[1]));
-
-  if (climate == 1) {
-    // Tropical Climate
-    double avgTemp =
-    27; // Correlating indoor and outdoor temperature and humidity in a sample of buildings in tropical climates
-    double orientationMultiplier =
-    1.01; // Effect Of Orientation On Indoor Temperature Case Study: Yekape Penjaringansari Housing in Surabaya
-    double baseTemp = avgTemp + (cos(angle)).abs() * orientationMultiplier;
-  } else {
-    // Desert/Arid Climate
-    double orientationTemperature =
-    1; // Influence of building orientation on internal temperature in saharan climates, building located in Ghardaïa region
-    // Assume little to no top incident solar radiation
-    double avgTemp =
-    33; // The Effect of Thermal Insulation on Cooling Load in Residential Buildings in Makkah, Saudi Arabia
-    // Impact of glazing to wall ratio in various climatic regions: A case study
-    double changeTemp =
-    3; // Thermal improvement by means of leaf cover on external walls — A simulation model
-  }
-
-  //Energy Calculations
-  double airHeatCapacity = 1012; // j/(kg K)
-  double airDensity = 1.225; // kg/m^3
-  double roomVol = pow(length, 2) * height;
-  double btuConversion = 1 / 1055;
-  double energyEfficentRatio = 10; // BTU removed per hour/watt drawn
-
-  return [1.0, 2.0];
 }
