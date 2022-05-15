@@ -28,7 +28,7 @@ class NasaPayload {
   }
 }
 
-class NasaDataRetriever extends ChangeNotifier {
+class NasaDataRetriever {
   late String url;
 
   Future<NasaPayload> getData({

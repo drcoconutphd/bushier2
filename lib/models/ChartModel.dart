@@ -1,23 +1,47 @@
-import 'package:bushier2/NasaDataDispatcher.dart';
+import 'package:bushier2/NasaDataRetriever.dart';
+import 'package:flutter/foundation.dart';
 
 class ChartData {
   ChartData(this.x, this.y, this.y2);
   final String x;
-  final double? y;
-  final double? y2;
+  double? y;
+  double? y2;
 }
 
-class ChartModel {
+class ChartModel extends ChangeNotifier {
+  static const List MONTH = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
   List<ChartData> energyData = [];
   List<ChartData> savingsData = [];
   NasaDataRetriever nasaDataRetriever = NasaDataRetriever();
 
-  void calculate() {
-    final nasaData = nasaDataRetriever.getData(
+  Future<void> calculate() async {
+    final nasaData = await nasaDataRetriever.getData(
         lat: 0.0,
         lng: 0.0,
         params: [NasaData.t2m, NasaData.t2m_max]
     );
+
+    List<double> t2m = nasaData.temps[NasaData.t2m]!;
+    energyData = [];
+    for (int i = 0; i < MONTH.length; i++) {
+      energyData.add(ChartData(MONTH[i], t2m[i], t2m[i]));
+    }
+
+    notifyListeners();
   }
 
   void spoof() {
