@@ -41,9 +41,12 @@ class CaptureViewState extends State<CaptureView> {
       body: FutureBuilder<void>( // waits till controller initialised
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
-          return (snapshot.connectionState == ConnectionState.done)
+          return (snapshot.connectionState == ConnectionState.done && false)
             ? CameraPreview(_controller)
-            : const Center(child: CircularProgressIndicator());
+            : Center(
+              child: Image.asset('assets/images/Picture2.png')
+            );
+            // : const Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: FloatingActionButton(
