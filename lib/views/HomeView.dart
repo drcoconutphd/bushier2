@@ -125,7 +125,15 @@ class _HomeViewState extends State<HomeView> {
                               const Padding(
                                 padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
                               ),
-                              chartWidget
+                              chartWidget,
+                              const Text("Area of Wall: 110 sqft"),
+                              const SizedBox(height: 10),
+                              const Text("Change in temprature: 1 deg"),
+                              const SizedBox(height: 10),
+                              const Text("Energy Savings for 1st Month: 1848kJ"),
+                              const SizedBox(height: 10),
+                              const Text("Cost savings: 460/kWh"),
+                              const SizedBox(height: 10),
                             ],
                           )
                       ],
@@ -142,7 +150,7 @@ class _HomeViewState extends State<HomeView> {
               children: <Widget>[
                 takePictureButton(),
                 const SizedBox(height: 10),
-                calculateTestButton()
+                calculateTestButton(),
                 const SizedBox(height: 10),
                 searchVendorsButton(),
               ],
