@@ -5,7 +5,8 @@ import 'HomeView.dart';
 
 class SplashView extends StatefulWidget {
   final CameraDescription cameraDescription;
-  const SplashView({Key? key, required this.cameraDescription}) : super(key: key);
+  const SplashView({Key? key, required this.cameraDescription})
+      : super(key: key);
 
   @override
   State<SplashView> createState() => _SplashViewState();
@@ -49,11 +50,11 @@ class _SplashViewState extends State<SplashView> {
                       // width: 300,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 67, 154, 103),
+                        color: Color.fromARGB(255, 76, 175, 80),
                       ),
                       child: const Center(
                         child: Text(
-                          'Enter App',
+                          'Enter Now!',
                           style: TextStyle(
                             fontSize: 25,
                             color: Colors.white,
@@ -66,19 +67,36 @@ class _SplashViewState extends State<SplashView> {
                 ),
               ),
               Positioned(
-                  bottom: 230,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Text(
-                      'D4DDY Some placeholder text here please!',
-                      style: TextStyle(
-                        height: 1.2,
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                      textAlign: TextAlign.center,
+                bottom: 230,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: const Text(
+                    "The grass isn't greener on the other side; it's greener where you water it. saving the earth starts with you!",
+                    style: TextStyle(
+                      height: 1.2,
+                      color: Colors.white,
+                      fontSize: 20,
                     ),
-                  )),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 400,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: const Text(
+                    'BUSHIER',
+                    style: TextStyle(
+                      height: 1.2,
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

@@ -18,7 +18,7 @@ Future<void> main() async {
   runApp(MaterialApp(
     title: 'Bushier2 Demo',
     theme: ThemeData(
-      primarySwatch: Colors.blue,
+      primarySwatch: Colors.green,
     ),
     home: SplashView(cameraDescription: firstCamera),
   ));
