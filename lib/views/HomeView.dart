@@ -12,11 +12,9 @@ import 'VendorPage.dart';
 
 class HomeView extends StatefulWidget {
   final CameraDescription cameraDescription;
-  final String? imagePath;
 
   const HomeView({
     Key? key,
-    this.imagePath,
     required this.title,
     required this.cameraDescription,
   }) : super(key: key);
@@ -31,17 +29,19 @@ class _HomeViewState extends State<HomeView> {
   DAO dao = DAO();
   ChartWidget chartWidget = ChartWidget();
   Segmentor segmentor = Segmentor();
+  String? imagePath;
 
   Widget takePictureButton() {
     return FloatingActionButton(
       onPressed: () async {
         try {
-          await Navigator.of(context).push(
+          imagePath = await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) =>
                   CaptureView(camera: widget.cameraDescription),
             ),
           );
+          setState(() {});
         } catch (e) {
           SnackBar(content: Text(e.toString()));
         }

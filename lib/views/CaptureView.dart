@@ -1,8 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import 'HomeView.dart';
-
 class CaptureView extends StatefulWidget {
   const CaptureView({
     Key? key,
@@ -53,17 +51,7 @@ class CaptureViewState extends State<CaptureView> {
           try {
             await _initializeControllerFuture; // ensure camera is initialized.
             final image = await _controller.takePicture(); // xfile
-
-            // If the picture was taken, display it on a new screen.
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => HomeView(
-                  imagePath: image.path,
-                  title: 'Bushier2',
-                  cameraDescription: widget.camera,
-                ),
-              ),
-            );
+            Navigator.pop(context, image.path); //return result to home page
           } catch (e) {
             SnackBar(content: Text(e.toString()));
           }
