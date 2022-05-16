@@ -56,14 +56,20 @@ class ChartModel extends ChangeNotifier {
       ChartData('Jun', 26.7, 2640),
       ChartData('Jul', 25.24, 3808),
       ChartData('Aug', 25.09, 3928),
-      ChartData('Sep', 25.8, 3360)
+      ChartData('Sep', 25.8, 3360),
+      ChartData('Oct', 26.39, 2888),
+      ChartData('Nov', 27.05, 2360),
+      ChartData('Dec', 26.81, 2552),
     ];
     savingsData = [
       ChartData('May', 27.69, 1848),
       ChartData('Jun', 26.7, 2640),
       ChartData('Jul', 25.24, 3808),
       ChartData('Aug', 25.09, 3928),
-      ChartData('Sep', 25.8, 3360)
+      ChartData('Sep', 25.8, 3360),
+      ChartData('Oct', 26.39, 2888),
+      ChartData('Nov', 27.05, 2360),
+      ChartData('Dec', 26.81, 2552),
     ];
   }
 }
