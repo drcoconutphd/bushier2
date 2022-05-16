@@ -107,10 +107,15 @@ class _HomeViewState extends State<HomeView> {
                       mainAxisAlignment:
                           MainAxisAlignment.center, // center children vertically
                       children: <Widget>[
-                        Image.asset('assets/images/Picture2.png'),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
                         ),
+                        const Text("Captured image"),
+                        const SizedBox(height: 10),
+                        Image.asset('assets/images/Picture2.png'),
+                        const SizedBox(height: 10),
+                        const Text("Processed image overlay"),
+                        const SizedBox(height: 10),
                         (visList == null)
                           ? const Text("Processing...")
                           : Image.asset('assets/images/Picture1.png'),
