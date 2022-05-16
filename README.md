@@ -30,8 +30,8 @@ Use bushierbrows to capture / upload building profiles to our ML models, to obta
 </div>
 Other parts of the solution:
 
-* Segmentation training/serving submodule: https://github.com/rehohoho/mmsegmentation \
-* Depth-estimation serving submodule: https://github.com/rehohoho/AdaBins \
+* Segmentation training/serving submodule: https://github.com/rehohoho/mmsegmentation
+* Depth-estimation serving submodule: https://github.com/rehohoho/AdaBins
 * Firebase functions submodule: https://github.com/rehohoho/bushier2_firebase_functions/
 
 ## Setup
@@ -47,5 +47,7 @@ See flutter documentation for installation and setting up of projects at https:/
 ## Sample results
 <div align="center">
     <img src="images/comparison1.jpg" width="400">
+</div>    
+<div align="center">
     <img src="images/comparison2.png" width="400">
 </div>
