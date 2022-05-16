@@ -1,7 +1,50 @@
 import 'dart:math';
-import 'package:vector_math/vector_math.dart';
+
 import 'package:geolocator/geolocator.dart';
 import 'SensorDataRetriever.dart';
+
+class ResultsModel {
+  ResultsModel(
+    this.avgTemp,
+    this.orientationMultipler,
+    this.baseTemp,
+    this.airHeatCapacity,
+    this.airDensity,
+    this.roomVol,
+    this.btuConversion,
+    this.energyEfficientRatio
+  ) {
+    getBTU();
+  };
+
+  double avgTemp;
+  double orientationMultipler;
+  double baseTemp;
+  double airHeatCapacity;
+  double airDensity;
+  double roomVol;
+  double btuConversion;
+  double energyEfficientRatio;
+
+  late double BTU;
+  late double wattHour;
+  late double dayEnergy;
+  late double monthEnergy;
+
+  double? getBTU() {
+    BTU = 2 * airDensity * roomVol * airHeatCapacity * btuConversion;
+  }
+  double? getWattHour() {
+    wattHour = BTU / energyEfficientRatio;
+  }
+  double? getDayEnergy() {
+    dayEnergy = wattHour * 24;
+  }
+  double? getMonthEnergy() {
+    monthEnergy = dayEnergy * 30;
+  }
+}
+
 
 Future<double> convertArea(List<double> target,
     {double length = 80, double height = 90, int climate = 1}) async {

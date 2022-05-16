@@ -2,7 +2,7 @@ import 'package:bushier2/models/NasaDataRetriever.dart';
 import 'package:bushier2/models/SensorDataRetriever.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import 'energyCalc.dart';
+import 'ResultModel.dart';
 
 class ChartData {
   ChartData(this.x, this.y, this.y2);
