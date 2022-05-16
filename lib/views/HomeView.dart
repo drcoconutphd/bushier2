@@ -66,13 +66,13 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget dbTestButton() {
-    return FloatingActionButton(
-      onPressed: () async {
-        dao.update();
-      },
-      child: const Icon(Icons.add),
-    );
+  void calculate() {
+    if (imagePath != null) {
+      Uint8List labelList = segmentor.segment(imagePath!);
+      visList = segmentor.visualise(labelList);
+      setState(() {});
+      print("HomeView/calculateTestButton: aft seg\n$visList");
+    }
   }
 
   Widget calculateTestButton() {
@@ -117,13 +117,17 @@ class _HomeViewState extends State<HomeView> {
                         const Text("Processed image overlay"),
                         const SizedBox(height: 10),
                         (visList == null)
-                          ? const Text("Processing...")
-                          : Image.asset('assets/images/Picture1.png'),
-                          // : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
-                        ),
-                        chartWidget
+                          ? const Text("Press on calculate to see results!")
+                          : Column(
+                            children: [
+                              Image.asset('assets/images/Picture1.png'),
+                              // : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                              ),
+                              chartWidget
+                            ],
+                          )
                       ],
                     ),
             ),
@@ -139,8 +143,6 @@ class _HomeViewState extends State<HomeView> {
                 takePictureButton(),
                 const SizedBox(height: 10),
                 searchVendorsButton(),
-                const SizedBox(height: 10),
-                dbTestButton(),
                 const SizedBox(height: 10),
                 calculateTestButton()
               ],
