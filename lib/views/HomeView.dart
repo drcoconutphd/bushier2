@@ -88,35 +88,42 @@ class _HomeViewState extends State<HomeView> {
           title: Text(widget.title),
         ),
         body: Center(
-          // layout widget, positions single child in middle of parent
-          child: (widget.imagePath == null)
-              ? const Text("Press on '+' and take a picture!")
-              : Column(
-                  // layout widget, arrange children vertically
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // center children vertically
-                  children: <Widget>[
-                    Image.file(File(widget.imagePath!)),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+          child: SingleChildScrollView(
+            child: Center(
+              // layout widget, positions single child in middle of parent
+              child: (widget.imagePath == null)
+                  ? const Text("Press on '+' and take a picture!")
+                  : Column(
+                      // layout widget, arrange children vertically
+                      mainAxisAlignment:
+                          MainAxisAlignment.center, // center children vertically
+                      children: <Widget>[
+                        Image.file(File(widget.imagePath!)),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                        ),
+                        chartWidget
+                      ],
                     ),
-                    chartWidget
-                  ],
-                ),
+            ),
+          ),
         ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              takePictureButton(),
-              const SizedBox(height: 10),
-              searchVendorsButton(),
-              const SizedBox(height: 10),
-              dbTestButton(),
-              const SizedBox(height: 10),
-              calculateTestButton()
-            ],
+        floatingActionButton: Container(
+          margin: EdgeInsets.only(top: 100),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                takePictureButton(),
+                const SizedBox(height: 10),
+                searchVendorsButton(),
+                const SizedBox(height: 10),
+                dbTestButton(),
+                const SizedBox(height: 10),
+                calculateTestButton()
+              ],
+            ),
           ),
         ));
   }
