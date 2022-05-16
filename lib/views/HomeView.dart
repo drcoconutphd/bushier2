@@ -150,7 +150,7 @@ class _HomeViewState extends State<HomeView> {
               children: <Widget>[
                 takePictureButton(),
                 const SizedBox(height: 10),
-                calculateTestButton()
+                calculateTestButton(),
                 const SizedBox(height: 10),
                 searchVendorsButton(),
               ],
