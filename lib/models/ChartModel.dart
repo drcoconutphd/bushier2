@@ -2,6 +2,7 @@ import 'package:bushier2/models/NasaDataRetriever.dart';
 import 'package:bushier2/models/SensorDataRetriever.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
+import 'energyCalc.dart';
 
 class ChartData {
   ChartData(this.x, this.y, this.y2);
@@ -36,8 +37,9 @@ class ChartModel extends ChangeNotifier {
     NasaPayload nasaData = await httpDataRetriever.getNasaData(
         lat: pos.latitude,
         lng: pos.longitude,
-        params: [NasaData.t2m, NasaData.t2m_max]
-    );
+        params: [NasaData.t2m, NasaData.t2m_max]);
+
+    convertArea([1.3539504607263098, 103.68779725423865]);
 
     List<double> t2m = nasaData.temps[NasaData.t2m]!;
     energyData = [];
@@ -48,20 +50,20 @@ class ChartModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void spoof() {
+  void defSpf() {
     energyData = [
-      ChartData('Jan', 35, 1000),
-      ChartData('Feb', 28, 2000),
-      ChartData('Mar', 34, 3500),
-      ChartData('Apr', 32, 5500),
-      ChartData('May', 40, 6200)
+      ChartData('May', 27.69, 1848),
+      ChartData('Jun', 26.7, 2640),
+      ChartData('Jul', 25.24, 3808),
+      ChartData('Aug', 25.09, 3928),
+      ChartData('Sep', 25.8, 3360)
     ];
     savingsData = [
-      ChartData('Jan', 35, 1000),
-      ChartData('Feb', 28, 2000),
-      ChartData('Mar', 34, 3500),
-      ChartData('Apr', 32, 5500),
-      ChartData('May', 40, 6200)
+      ChartData('May', 27.69, 1848),
+      ChartData('Jun', 26.7, 2640),
+      ChartData('Jul', 25.24, 3808),
+      ChartData('Aug', 25.09, 3928),
+      ChartData('Sep', 25.8, 3360)
     ];
   }
 }
