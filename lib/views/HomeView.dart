@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:bitmap/bitmap.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,7 @@ class _HomeViewState extends State<HomeView> {
   ChartWidget chartWidget = ChartWidget();
   Segmentor segmentor = Segmentor();
   String? imagePath;
+  Uint8List? visList;
 
   Widget takePictureButton() {
     return FloatingActionButton(
@@ -77,6 +79,12 @@ class _HomeViewState extends State<HomeView> {
     return FloatingActionButton(
       onPressed: () async {
         chartWidget.calculate();
+        if (imagePath != null) {
+          Uint8List labelList = segmentor.segment(imagePath!);
+          visList = segmentor.visualise(labelList);
+          setState(() {});
+          print("HomeView/calculateTestButton: aft seg\n$visList");
+        }
       },
       child: const Icon(Icons.calculate),
     );
@@ -92,14 +100,17 @@ class _HomeViewState extends State<HomeView> {
           child: SingleChildScrollView(
             child: Center(
               // layout widget, positions single child in middle of parent
-              child: (widget.imagePath == null)
+              child: (imagePath == null)
                   ? const Text("Press on '+' and take a picture!")
                   : Column(
                       // layout widget, arrange children vertically
                       mainAxisAlignment:
                           MainAxisAlignment.center, // center children vertically
                       children: <Widget>[
-                        Image.file(File(widget.imagePath!)),
+                        Image.file(File(imagePath!)),
+                        (visList == null)
+                          ? const Text("Processing...")
+                          : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
                         ),

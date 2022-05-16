@@ -21,6 +21,15 @@ class Segmentor {
     const Color.fromARGB(255, 0, 128, 128).value,
     const Color.fromARGB(255, 0, 128, 0).value,
     const Color.fromARGB(255, 0, 0, 128).value,
+    // 0x000000ff,
+    // 0x800000ff,
+    // 0x800080ff,
+    // 0x808000ff,
+    // 0x808080ff,
+    // 0x804000ff,
+    // 0x008080ff,
+    // 0x008000ff,
+    // 0x000080ff
   ];
 
   late Interpreter interpreter;
