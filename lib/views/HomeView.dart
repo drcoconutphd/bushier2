@@ -1,13 +1,14 @@
 import 'dart:io';
+import 'dart:typed_data';
 
-import 'package:bushier2/models/Segmentor.dart';
-import 'package:bushier2/views/CaptureView.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import '../models/DAO.dart';
+import '../models/Segmentor.dart';
+import 'CaptureView.dart';
 import 'ChartWidget.dart';
-import './VendorPage.dart';
+import 'VendorPage.dart';
 
 class HomeView extends StatefulWidget {
   final CameraDescription cameraDescription;
