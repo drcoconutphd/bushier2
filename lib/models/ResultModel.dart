@@ -15,7 +15,10 @@ class ResultsModel {
     this.energyEfficientRatio
   ) {
     getBTU();
-  };
+    getWattHour();
+    getDayEnergy();
+    getMonthEnergy();
+  }
 
   double avgTemp;
   double orientationMultipler;

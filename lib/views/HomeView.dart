@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import '../models/DAO.dart';
 import '../models/Segmentor.dart';
-import '../models/energyCalc.dart';
 import 'CaptureView.dart';
 import 'ChartWidget.dart';
 import 'VendorPage.dart';
