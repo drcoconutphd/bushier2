@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:bitmap/bitmap.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import '../models/DAO.dart';
 import '../models/Segmentor.dart';
+import '../models/energyCalc.dart';
 import 'CaptureView.dart';
 import 'ChartWidget.dart';
 import 'VendorPage.dart';
@@ -92,6 +92,10 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    const area = 110;
+    const change = 1.00;
+    const energy = 1848;
+    const savings = 460;
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -104,8 +108,8 @@ class _HomeViewState extends State<HomeView> {
                   ? const Text("Press on '+' and take a picture!")
                   : Column(
                       // layout widget, arrange children vertically
-                      mainAxisAlignment:
-                          MainAxisAlignment.center, // center children vertically
+                      mainAxisAlignment: MainAxisAlignment
+                          .center, // center children vertically
                       children: <Widget>[
                         const Padding(
                           padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
@@ -117,25 +121,28 @@ class _HomeViewState extends State<HomeView> {
                         const Text("Processed image overlay"),
                         const SizedBox(height: 10),
                         (visList == null)
-                          ? const Text("Press on calculate to see results!")
-                          : Column(
-                            children: [
-                              Image.asset('assets/images/Picture1.png'),
-                              // : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
-                              ),
-                              chartWidget,
-                              const Text("Area of Wall: 110 sqft"),
-                              const SizedBox(height: 10),
-                              const Text("Change in temprature: 1 deg"),
-                              const SizedBox(height: 10),
-                              const Text("Energy Savings for 1st Month: 1848kJ"),
-                              const SizedBox(height: 10),
-                              const Text("Cost savings: 460/kWh"),
-                              const SizedBox(height: 10),
-                            ],
-                          )
+                            ? const Text("Press on calculate to see results!")
+                            : Column(
+                                children: [
+                                  Image.asset('assets/images/Picture1.png'),
+                                  // : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.fromLTRB(50, 10, 50, 10),
+                                  ),
+                                  chartWidget,
+                                  const Text("Area of Wall: $area sqft"),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                      "Change in temprature: $change deg"),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                      "Energy Savings for 1st Month: $energy kJ"),
+                                  const SizedBox(height: 10),
+                                  const Text("Cost savings: $savings /kWh"),
+                                  const SizedBox(height: 10),
+                                ],
+                              )
                       ],
                     ),
             ),
