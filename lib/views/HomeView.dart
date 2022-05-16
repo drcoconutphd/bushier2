@@ -107,10 +107,14 @@ class _HomeViewState extends State<HomeView> {
                       mainAxisAlignment:
                           MainAxisAlignment.center, // center children vertically
                       children: <Widget>[
-                        Image.file(File(imagePath!)),
+                        Image.asset('assets/images/Picture2.png'),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                        ),
                         (visList == null)
                           ? const Text("Processing...")
-                          : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
+                          : Image.asset('assets/images/Picture1.png'),
+                          // : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
                         const Padding(
                           padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
                         ),
