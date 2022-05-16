@@ -32,10 +32,11 @@ class Body extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Vendors',
-                          style: Theme.of(context).textTheme.headline5?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.headline5?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ],
                     )),
@@ -45,7 +46,8 @@ class Body extends StatelessWidget {
                   right: 0,
                   child: Container(
                       alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: kDefaultPadding),
                       margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
                       height: 54,
                       decoration: BoxDecoration(
@@ -88,7 +90,7 @@ class Body extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: kDefaultPadding / 4),
                   child: Text(
-                    'Recomended',
+                    'Recommended',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -164,7 +166,6 @@ class Body extends StatelessWidget {
               ],
             ),
           ),
-
           Container(
             margin: EdgeInsets.only(
               bottom: kDefaultPadding * 2.5,
@@ -224,7 +225,6 @@ class Body extends StatelessWidget {
               ],
             ),
           ),
-
           Container(
             margin: EdgeInsets.only(
               bottom: kDefaultPadding * 2.5,

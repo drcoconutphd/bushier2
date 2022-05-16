@@ -71,7 +71,7 @@ class _SplashViewState extends State<SplashView> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: const Text(
-                    "The grass isn't greener on the other side; it's greener where you water it. saving the earth starts with you!",
+                    "The grass isn't greener on the other side; It's greener where you water it. Saving the earth starts with you!",
                     style: TextStyle(
                       height: 1.2,
                       color: Colors.white,
