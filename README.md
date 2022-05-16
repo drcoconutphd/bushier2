@@ -1,4 +1,4 @@
-# bushier2
+# bushier brows
 
 A new Flutter project.
 
