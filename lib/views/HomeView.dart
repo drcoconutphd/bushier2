@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import '../models/DAO.dart';
 import '../models/Segmentor.dart';
 import 'CaptureView.dart';
@@ -108,7 +108,8 @@ class _HomeViewState extends State<HomeView> {
             child: Center(
               // layout widget, positions single child in middle of parent
               child: (imagePath == null)
-                  ? const Text("Press on '+' and take a picture!")
+                  ? Text("Press on camera and take a picture!",
+                    style: CustomWidgets.instructionTextStyle(context))
                   : Column(
                       // layout widget, arrange children vertically
                       mainAxisAlignment: MainAxisAlignment
@@ -117,16 +118,18 @@ class _HomeViewState extends State<HomeView> {
                         const Padding(
                           padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
                         ),
-                        const Text("Captured image"),
+                        CustomWidgets.titleText(context, 'Captured Image'),
                         const SizedBox(height: 10),
                         Image.asset('assets/images/Picture2.png'),
                         const SizedBox(height: 10),
-                        const Text("Processed image overlay"),
-                        const SizedBox(height: 10),
                         (visList == null)
-                            ? const Text("Press on calculate to see results!")
+                            ? Text("Press on calculate to see results!",
+                              style: CustomWidgets.instructionTextStyle(context))
                             : Column(
                                 children: [
+                                  CustomWidgets.titleText(context,
+                                      'Processed Image Overlay'),
+                                  const SizedBox(height: 10),
                                   Image.asset('assets/images/Picture1.png'),
                                   // : Image.memory(Bitmap.fromHeadless(384, 512, visList!).buildHeaded()),
                                   const Padding(

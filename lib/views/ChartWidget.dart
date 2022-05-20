@@ -1,3 +1,4 @@
+import 'package:bushier2/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -88,10 +89,7 @@ class _ChartWidgetState extends State<ChartWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
-          'Results',
-          style: TextStyle(fontSize: 25.0),
-        ),
+        CustomWidgets.titleText(context, 'Results'),
         resultChart()
       ],
     );
