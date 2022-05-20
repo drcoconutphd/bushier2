@@ -34,6 +34,11 @@ class _HomeViewState extends State<HomeView> {
   String? imagePath;
   Uint8List? visList;
 
+  bool isButtonActivePicture = true;
+  bool isButtonActiveCalculate = false;
+  bool isButtonActiveVendor = false;
+
+
   Widget takePictureButton() {
     return FloatingActionButton(
       onPressed: () async {
@@ -44,12 +49,17 @@ class _HomeViewState extends State<HomeView> {
                   CaptureView(camera: widget.cameraDescription),
             ),
           );
+          isButtonActivePicture = false;
+          isButtonActiveCalculate = true;
           setState(() {});
         } catch (e) {
           SnackBar(content: Text(e.toString()));
         }
       },
       child: const Icon(Icons.camera),
+      backgroundColor: isButtonActivePicture
+          ? Colors.green
+          : Colors.green,
     );
   }
 
@@ -64,6 +74,9 @@ class _HomeViewState extends State<HomeView> {
         );
       },
       child: const Icon(Icons.add_shopping_cart_outlined),
+      backgroundColor: isButtonActiveVendor
+          ? Colors.green
+          : Colors.green,
     );
   }
 
@@ -83,11 +96,16 @@ class _HomeViewState extends State<HomeView> {
         if (imagePath != null) {
           Uint8List labelList = segmentor.segment(imagePath!);
           visList = segmentor.visualise(labelList);
+          isButtonActiveCalculate = false;
+          isButtonActiveVendor = true;
           setState(() {});
           print("HomeView/calculateTestButton: aft seg\n$visList");
         }
       },
       child: const Icon(Icons.calculate),
+      backgroundColor: isButtonActiveCalculate
+          ? Colors.green
+          : Colors.green,
     );
   }
 
@@ -108,7 +126,9 @@ class _HomeViewState extends State<HomeView> {
             child: Center(
               // layout widget, positions single child in middle of parent
               child: (imagePath == null)
-                  ? Text("Press on camera and take a picture!",
+                  ? Text("1. Press camera and take a picture\n"
+                    "2. Press calculate to get an estimate\n"
+                    "3. Press vendors to find recommended vendors\n",
                     style: CustomWidgets.instructionTextStyle(context))
                   : Column(
                       // layout widget, arrange children vertically
