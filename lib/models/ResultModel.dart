@@ -56,9 +56,9 @@ Future<double> convertArea(List<double> target,
   // height: height of building in m
   // climate: 1 = singapore
 
-  SensorDataRetriever? SDR;
+  SensorDataRetriever SDR = SensorDataRetriever();
 
-  Position position = await SDR!.getPosition();
+  Position position = await SDR.getPosition();
 
   double angle = Geolocator.bearingBetween(
       position.latitude, position.longitude, target[0], target[1]);
