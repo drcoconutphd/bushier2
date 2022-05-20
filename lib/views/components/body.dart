@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:bushier2/constants.dart';
 
-import '../../main.dart';
-
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,8 @@ class Body extends StatelessWidget {
                                   ),
                         ),
                       ],
-                    )),
+                    )
+                ),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -95,10 +94,10 @@ class Body extends StatelessWidget {
               left: kDefaultPadding,
               top: kDefaultPadding / 2,
             ),
-            width: size.width * 0.4,
+            width: size.width * 0.6,
             child: Column(
               children: <Widget>[
-                Image.asset('assets/images/image_1.png'),
+                Image.asset('assets/images/vendors_greenturf.jpeg'),
                 Container(
                   padding: EdgeInsets.all(kDefaultPadding / 2),
                   decoration: BoxDecoration(
@@ -154,10 +153,10 @@ class Body extends StatelessWidget {
               left: kDefaultPadding,
               top: kDefaultPadding / 2,
             ),
-            width: size.width * 0.4,
+            width: size.width * 0.6,
             child: Column(
               children: <Widget>[
-                Image.asset('assets/images/image_2.png'),
+                Image.asset('assets/images/vendors_verticalgarden.png'),
                 Container(
                   padding: EdgeInsets.all(kDefaultPadding / 2),
                   decoration: BoxDecoration(
@@ -180,7 +179,7 @@ class Body extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: "City Plants\n",
+                              text: "Vertical Garden Pte. Ltd.\n",
                               style: TextStyle(
                                 color: kTextColor,
                               ),
@@ -213,10 +212,10 @@ class Body extends StatelessWidget {
               left: kDefaultPadding,
               top: kDefaultPadding / 2,
             ),
-            width: size.width * 0.4,
+            width: size.width * 0.6,
             child: Column(
               children: <Widget>[
-                Image.asset('assets/images/image_3.png'),
+                Image.asset('assets/images/vendors_mosscape.png'),
                 Container(
                   padding: EdgeInsets.all(kDefaultPadding / 2),
                   decoration: BoxDecoration(
@@ -239,7 +238,7 @@ class Body extends StatelessWidget {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: "Green Roofs\n",
+                              text: "Mosscape\n",
                               style: TextStyle(
                                 color: kTextColor,
                               ),
