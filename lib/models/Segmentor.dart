@@ -21,15 +21,6 @@ class Segmentor {
     const Color.fromARGB(255, 0, 128, 128).value,
     const Color.fromARGB(255, 0, 128, 0).value,
     const Color.fromARGB(255, 0, 0, 128).value,
-    // 0x000000ff,
-    // 0x800000ff,
-    // 0x800080ff,
-    // 0x808000ff,
-    // 0x808080ff,
-    // 0x804000ff,
-    // 0x008080ff,
-    // 0x008000ff,
-    // 0x000080ff
   ];
 
   late Interpreter interpreter;
@@ -43,9 +34,6 @@ class Segmentor {
   NormalizeOp preProcessNormalizeOp = NormalizeOp(114.5, 57.63);
 
   late List<String> labels;
-
-  TensorBuffer probabilityBuffer = TensorBuffer.createFixedSize(
-      <int>[1, 384, 512], TfLiteType.uint8);
 
   Segmentor() {
     FirebaseModelDownloader instance = FirebaseModelDownloader.instance;
@@ -86,9 +74,9 @@ class Segmentor {
   }
 
   TensorImage _preProcess() {
-    int cropSize = min(_inputImage.height, _inputImage.width);
+    // int cropSize = min(_inputImage.height, _inputImage.width);
     return ImageProcessorBuilder()
-        .add(ResizeWithCropOrPadOp(cropSize, cropSize))
+        // .add(ResizeWithCropOrPadOp(cropSize, cropSize))
         .add(ResizeOp(_inputShape[2], _inputShape[3], ResizeMethod.NEAREST_NEIGHBOUR))
         .add(preProcessNormalizeOp)
         .build()
@@ -102,23 +90,25 @@ class Segmentor {
     _inputImage = _preProcess();
     final pre = DateTime.now().millisecondsSinceEpoch - pres;
 
-    print('Time to load image: $pre ms');
+    print('Segmentor/segment: Time to load image: $pre ms');
+    print('Segmentor/segment: ${_inputImage.buffer.asFloat32List()}');
 
     final runs = DateTime.now().millisecondsSinceEpoch;
     interpreter.run(_inputImage.buffer, _outputBuffer.getBuffer());
     final run = DateTime.now().millisecondsSinceEpoch - runs;
 
-    print('Time to run inference: $run ms');
+    print('Segmentor/segment: Time to run inference: $run ms');
 
     Uint8List labelList = _outputBuffer.buffer.asUint8List();
     return labelList;
   }
 
   Uint8List visualise(Uint8List labelList) {
+    print('Segmentor/visualise: $labelList');
     List<int> visList = labelList.map((e) => LABELME_FACADE_PALATTE[e]).toList();
+    print('Segmentor/visualise: $visList');
     Uint8List visImage = Uint32List.fromList(visList).buffer.asUint8List();
-    // print(visList.length);
-    // print(visImage.buffer.lengthInBytes);
+    print('Segmentor/visualise: $visImage');
     return visImage;
   }
 
