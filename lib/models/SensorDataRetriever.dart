@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
 class SensorDataRetriever {
   Future<Position> getPosition() async {
